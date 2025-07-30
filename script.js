@@ -1,0 +1,79 @@
+// Grab dropdown elements
+const fromCurrency = document.getElementById('fromCurrency');
+const display = document.getElementById('display');
+const start = document.getElementById('start');
+const much = document.getElementById('much');
+const end = document.getElementById('end');
+const amount = document.getElementById('amount');
+const toCurrency = document.getElementById('toCurrency');
+const convertButton = document.getElementById('convertButton');
+const convertedValue = document.getElementById('convertedValue');
+const usdgbp = document.getElementById('usdgbp');
+const gbpjpy = document.getElementById('gbpjpy');
+const usdcny = document.getElementById('usdcny');
+const usdeur = document.getElementById('usdeur');
+const eurgbp = document.getElementById('eurgbp');
+
+const usdetb = document.getElementById('usdetb');
+const euretb = document.getElementById('euretb');
+const gbpetb = document.getElementById('gbpetb');
+const saretb = document.getElementById('saretb');
+const aedetb = document.getElementById('aedetb');
+let today=new Date()
+year=today.getFullYear()
+month=String(today.getMonth()+1).padStart(2,"0")
+day=String(today.getDate()).padStart(2,"0")
+let date=year+"-"+month+"-"+day
+if (!amount.value) {
+	amount.value=1
+}
+async function etb(){
+const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=ETB&date=2012-06-24&amount=1&format=json`)
+const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=ETB&date=2012-06-24&amount=1&format=json`)
+const res3=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=ETB&date=2012-06-24&amount=1&format=json`)
+const res4=await fetch(`https://api.fxratesapi.com/convert?from=SAR&to=ETB&date=2012-06-24&amount=1&format=json`)
+const res5=await fetch(`https://api.fxratesapi.com/convert?from=AED&to=ETB&date=2012-06-24&amount=1&format=json`)
+const data1=await res1.json()
+const data2=await res2.json()
+const data3=await res3.json()
+const data4=await res4.json()
+const data5=await res5.json()
+usdetb.innerText=data1.result.toFixed(2)
+euretb.innerText=data2.result.toFixed(2)
+gbpetb.innerText=data3.result.toFixed(2)
+saretb.innerText=data4.result.toFixed(2)
+aedetb.innerText=data5.result.toFixed(2)
+}
+async function others(){
+const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=GBP&date=2012-06-24&amount=1&format=json`)
+const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=JPY&date=2012-06-24&amount=1&format=json`)
+const res3=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=CNY&date=2012-06-24&amount=1&format=json`)
+const res4=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=EUR&date=2012-06-24&amount=1&format=json`)
+const res5=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=GBP&date=2012-06-24&amount=1&format=json`)
+const data1=await res1.json()
+const data2=await res2.json()
+const data3=await res3.json()
+const data4=await res4.json()
+const data5=await res5.json()
+usdgbp.innerText=data1.result.toFixed(2)
+gbpjpy.innerText=data2.result.toFixed(2)
+usdcny.innerText=data3.result.toFixed(2)
+usdeur.innerText=data4.result.toFixed(2)
+eurgbp.innerText=data5.result.toFixed(2)
+}
+etb()
+others()
+// convertButton.onclick=async ()=>{
+// 	try {
+// 	const res=await fetch(`https://api.fxratesapi.com/convert?from=${fromCurrency.value.toUpperCase()}&to=${toCurrency.value.toUpperCase()}&date=${date}&amount=${amount.value}&format=json`)
+// 	const data= await res.json()
+// 	start.innerText=fromCurrency.value.toUpperCase()
+// 	end.innerText=" "+toCurrency.value.toUpperCase()
+// 	much.innerText=amount.value+" "
+// 	convertedValue.innerText=data.result
+// 	display.setAttribute("class","block")
+// 	console.log(data)
+// 	} catch (error) {
+// 	console.log(error)	
+// 	}
+// }
