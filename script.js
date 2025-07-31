@@ -8,6 +8,7 @@ const amount = document.getElementById('amount');
 const toCurrency = document.getElementById('toCurrency');
 const convertButton = document.getElementById('convertButton');
 const convertedValue = document.getElementById('convertedValue');
+const dateInput = document.getElementById('dateInput');
 const usdgbp = document.getElementById('usdgbp');
 const gbpjpy = document.getElementById('gbpjpy');
 const usdcny = document.getElementById('usdcny');
@@ -27,53 +28,55 @@ let date=year+"-"+month+"-"+day
 if (!amount.value) {
 	amount.value=1
 }
+if (!dateInput.value) {
+	dateInput.value=date
+}
 async function etb(){
-const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=ETB&date=2012-06-24&amount=1&format=json`)
-const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=ETB&date=2012-06-24&amount=1&format=json`)
-const res3=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=ETB&date=2012-06-24&amount=1&format=json`)
-const res4=await fetch(`https://api.fxratesapi.com/convert?from=SAR&to=ETB&date=2012-06-24&amount=1&format=json`)
-const res5=await fetch(`https://api.fxratesapi.com/convert?from=AED&to=ETB&date=2012-06-24&amount=1&format=json`)
+const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=ETB&date=${date}&amount=1&format=json`)
+const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=ETB&date=${date}&amount=1&format=json`)
+const res3=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=ETB&date=${date}&amount=1&format=json`)
+const res4=await fetch(`https://api.fxratesapi.com/convert?from=SAR&to=ETB&date=${date}&amount=1&format=json`)
+const res5=await fetch(`https://api.fxratesapi.com/convert?from=AED&to=ETB&date=${date}&amount=1&format=json`)
 const data1=await res1.json()
 const data2=await res2.json()
 const data3=await res3.json()
 const data4=await res4.json()
 const data5=await res5.json()
-usdetb.innerText=data1.result.toFixed(2)
-euretb.innerText=data2.result.toFixed(2)
-gbpetb.innerText=data3.result.toFixed(2)
-saretb.innerText=data4.result.toFixed(2)
-aedetb.innerText=data5.result.toFixed(2)
+usdetb.innerText="≈ "+data1.result.toFixed(2)
+euretb.innerText="≈ "+data2.result.toFixed(2)
+gbpetb.innerText="≈ "+data3.result.toFixed(2)
+saretb.innerText="≈ "+data4.result.toFixed(2)
+aedetb.innerText="≈ "+data5.result.toFixed(2)
 }
 async function others(){
-const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=GBP&date=2012-06-24&amount=1&format=json`)
-const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=JPY&date=2012-06-24&amount=1&format=json`)
-const res3=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=CNY&date=2012-06-24&amount=1&format=json`)
-const res4=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=EUR&date=2012-06-24&amount=1&format=json`)
-const res5=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=GBP&date=2012-06-24&amount=1&format=json`)
+const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=GBP&date=${date}&amount=1&format=json`)
+const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=JPY&date=${date}&amount=1&format=json`)
+const res3=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=CNY&date=${date}&amount=1&format=json`)
+const res4=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=EUR&date=${date}&amount=1&format=json`)
+const res5=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=GBP&date=${date}&amount=1&format=json`)
 const data1=await res1.json()
 const data2=await res2.json()
 const data3=await res3.json()
 const data4=await res4.json()
 const data5=await res5.json()
-usdgbp.innerText=data1.result.toFixed(2)
-gbpjpy.innerText=data2.result.toFixed(2)
-usdcny.innerText=data3.result.toFixed(2)
-usdeur.innerText=data4.result.toFixed(2)
-eurgbp.innerText=data5.result.toFixed(2)
+usdgbp.innerText="≈ "+data1.result.toFixed(2)
+gbpjpy.innerText="≈ "+data2.result.toFixed(2)
+usdcny.innerText="≈ "+data3.result.toFixed(2)
+usdeur.innerText="≈ "+data4.result.toFixed(2)
+eurgbp.innerText="≈ "+data5.result.toFixed(2)
 }
 etb()
 others()
-// convertButton.onclick=async ()=>{
-// 	try {
-// 	const res=await fetch(`https://api.fxratesapi.com/convert?from=${fromCurrency.value.toUpperCase()}&to=${toCurrency.value.toUpperCase()}&date=${date}&amount=${amount.value}&format=json`)
-// 	const data= await res.json()
-// 	start.innerText=fromCurrency.value.toUpperCase()
-// 	end.innerText=" "+toCurrency.value.toUpperCase()
-// 	much.innerText=amount.value+" "
-// 	convertedValue.innerText=data.result
-// 	display.setAttribute("class","block")
-// 	console.log(data)
-// 	} catch (error) {
-// 	console.log(error)	
-// 	}
-// }
+convertButton.onclick=async ()=>{
+	try {
+	const res=await fetch(`https://api.fxratesapi.com/convert?from=${fromCurrency.value.toUpperCase()}&to=${toCurrency.value.toUpperCase()}&date=${dateInput.value}&amount=${amount.value}&format=json`)
+	const data= await res.json()
+	start.innerText=fromCurrency.value.toUpperCase()
+	end.innerText=" "+toCurrency.value.toUpperCase()
+	much.innerText=amount.value+" "
+	convertedValue.innerText="≈ "+data.result.toFixed(2)
+	display.setAttribute("class","block")
+	} catch (error) {
+	console.log(error)
+	}
+}

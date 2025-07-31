@@ -8,7 +8,6 @@
   </head>
   <body class="bg-gray-100 text-gray-900 font-sans">
 
-    <!-- Main Container -->
     <main class="max-w-4xl mx-auto my-12 p-8 bg-white rounded-3xl shadow-2xl space-y-10">
 
       <!-- Header -->
@@ -18,15 +17,15 @@
       </header>
 
       <!-- Dropdowns Section -->
-      <section class="flex items-center gap-4">
+      <section class="flex flex-col sm:flex-row items-center gap-4">
         <!-- Input for Amount -->
-        <div class="flex-1">
+        <div class="flex-1 w-full">
           <label for="amount" class="block text-sm font-semibold text-gray-700 mb-1">Amount</label>
           <input id="amount" type="number" placeholder="Enter amount" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white" />
         </div>
 
         <!-- From Currency Dropdown -->
-        <div class="flex-1">
+        <div class="flex-1 w-full">
           <label for="fromCurrency" class="block text-sm font-semibold text-gray-700 mb-1">From Currency</label>
           <select id="fromCurrency" name="fromCurrency" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
             <!-- Sorted by global influence -->
@@ -61,14 +60,11 @@
             <option value="try">Turkey (Turkish Lira)</option>
             <option value="aed">United Arab Emirates (United Arab Emirates Dirham)</option>
             <option value="zar">South Africa (South African Rand)</option>
-
           </select>
         </div>
 
-        <!-- Remove Arrow and keep inputs straight -->
-
         <!-- To Currency Dropdown -->
-        <div class="flex-1">
+        <div class="flex-1 w-full">
           <label for="toCurrency" class="block text-sm font-semibold text-gray-700 mb-1">To Currency</label>
           <select id="toCurrency" name="toCurrency" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
             <!-- Same list as above -->
@@ -103,17 +99,22 @@
             <option value="aed">United Arab Emirates (United Arab Emirates Dirham)</option>
             <option value="usd">United States (United States Dollar)</option>
             <option value="zar">South Africa (South African Rand)</option>
-
           </select>
+        </div>
+
+        <!-- Date Picker (hidden by default) -->
+        <div class="flex-1 w-full " id="dateInputWrapper">
+          <label for="dateInput" class="block text-sm font-semibold text-gray-700 mb-1">Select Date</label>
+          <input id="dateInput" type="date" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white" />
         </div>
       </section>
 
       <!-- Convert Button -->
-     <div class="text-center mt-6">
-  <button id="convertButton" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-    Convert
-  </button>
-</div>
+      <div class="text-center mt-6">
+        <button id="convertButton" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          Convert
+        </button>
+      </div>
 
       <!-- Fetched Conversion Display -->
       <section id="display" class="hidden">
@@ -124,31 +125,30 @@
 
       <!-- Major Exchange Rate Pairs -->
       <section class="mt-10">
-  <h2 class="text-xl font-bold text-gray-800 mb-4">Major Currency Pairs (Today)</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="bg-indigo-50 rounded-lg shadow p-4 flex justify-between">
-      <span class="font-medium">1 USD → GBP</span>
-      <span id="usdgbp" class="font-semibold text-indigo-700">≈ 0.78</span>
-    </div>
-    <div class="bg-green-50 rounded-lg shadow p-4 flex justify-between">
-      <span class="font-medium">1 GBP → JPY</span>
-      <span id="gbpjpy" class="font-semibold text-green-700">≈ 182.45</span>
-    </div>
-    <div class="bg-yellow-50 rounded-lg shadow p-4 flex justify-between">
-      <span class="font-medium">1 USD → CNY</span>
-      <span id="usdcny" class="font-semibold text-yellow-700">≈ 7.24</span>
-    </div>
-    <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
-      <span class="font-medium">1 USD → EUR</span>
-      <span id="usdeur" class="font-semibold text-pink-700">≈ 0.91</span>
-    </div>
-    <div class="bg-blue-50 rounded-lg shadow p-4 flex justify-between">
-      <span class="font-medium">1 EUR → GBP</span>
-      <span id="eurgbp" class="font-semibold text-blue-700">≈ 0.85</span>
-    </div>
-  </div>
-</section>
-
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Major Currency Pairs (Today)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-indigo-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 USD → GBP</span>
+            <span id="usdgbp" class="font-semibold text-indigo-700"></span>
+          </div>
+          <div class="bg-green-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 GBP → JPY</span>
+            <span id="gbpjpy" class="font-semibold text-green-700"></span>
+          </div>
+          <div class="bg-yellow-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 USD → CNY</span>
+            <span id="usdcny" class="font-semibold text-yellow-700"></span>
+          </div>
+          <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 USD → EUR</span>
+            <span id="usdeur" class="font-semibold text-pink-700"></span>
+          </div>
+          <div class="bg-blue-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 EUR → GBP</span>
+            <span id="eurgbp" class="font-semibold text-blue-700"></span>
+          </div>
+        </div>
+      </section>
 
       <!-- ETB Focused Exchange Rates -->
       <section class="mt-10">
@@ -156,32 +156,31 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="bg-indigo-50 rounded-lg shadow p-4 flex justify-between">
             <span class="font-medium">1 US-DOLLAR → BIRR</span>
-            <span id="usdetb" class="font-semibold text-indigo-700">≈ 56.70</span>
+            <span id="usdetb" class="font-semibold text-indigo-700"></span>
           </div>
           <div class="bg-green-50 rounded-lg shadow p-4 flex justify-between">
             <span class="font-medium">1 EURO → BIRR</span>
-            <span id="euretb" class="font-semibold text-green-700">≈ 61.20</span>
+            <span id="euretb" class="font-semibold text-green-700"></span>
           </div>
           <div class="bg-yellow-50 rounded-lg shadow p-4 flex justify-between">
             <span class="font-medium">1 POUND → BIRR</span>
-            <span id="gbpetb" class="font-semibold text-yellow-700">≈ 71.50</span>
+            <span id="gbpetb" class="font-semibold text-yellow-700"></span>
           </div>
           <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
             <span class="font-medium">1 RIYAL → BIRR</span>
-            <span id="saretb" class="font-semibold text-pink-700">≈ 0.38</span>
+            <span id="saretb" class="font-semibold text-pink-700"></span>
           </div>
           <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
             <span class="font-medium">1 DIRHAM → BIRR</span>
-            <span id="aedetb" class="font-semibold text-pink-700">≈ 0.38</span>
+            <span id="aedetb" class="font-semibold text-pink-700"></span>
           </div>
         </div>
       </section>
 
       <!-- Footer -->
       <footer class="text-center text-sm text-gray-400 mt-10">
-        © 2025 Currency Converter App. Built with Tailwind CSS.
+        © 2025 Currency Converter App. Built with <a class="text-blue-700 font-bold" href="http://syntax.pro.et">SyntaxDesigns</a>
       </footer>
-
     </main>
     <script src="script.js"></script>
   </body>
