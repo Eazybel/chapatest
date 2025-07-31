@@ -9,6 +9,9 @@ const toCurrency = document.getElementById('toCurrency');
 const convertButton = document.getElementById('convertButton');
 const convertedValue = document.getElementById('convertedValue');
 const dateInput = document.getElementById('dateInput');
+const body=document.querySelector("body")
+const main=document.querySelector("main")
+const spinner=document.getElementById("spinner")
 const usdgbp = document.getElementById('usdgbp');
 const gbpjpy = document.getElementById('gbpjpy');
 const usdcny = document.getElementById('usdcny');
@@ -32,6 +35,8 @@ if (!dateInput.value) {
 	dateInput.value=date
 }
 async function etb(){
+	main.style.display="none"
+	spinner.classList.remove("hidden")
 const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=ETB&date=${date}&amount=1&format=json`)
 const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=ETB&date=${date}&amount=1&format=json`)
 const res3=await fetch(`https://api.fxratesapi.com/convert?from=EUR&to=ETB&date=${date}&amount=1&format=json`)
@@ -47,8 +52,12 @@ euretb.innerText="≈ "+data2.result.toFixed(2)
 gbpetb.innerText="≈ "+data3.result.toFixed(2)
 saretb.innerText="≈ "+data4.result.toFixed(2)
 aedetb.innerText="≈ "+data5.result.toFixed(2)
+main.style.display="block"
+	spinner.classList.add("hidden")
 }
 async function others(){
+	main.style.display="none"
+	spinner.classList.remove("hidden")
 const res1=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=GBP&date=${date}&amount=1&format=json`)
 const res2=await fetch(`https://api.fxratesapi.com/convert?from=GBP&to=JPY&date=${date}&amount=1&format=json`)
 const res3=await fetch(`https://api.fxratesapi.com/convert?from=USD&to=CNY&date=${date}&amount=1&format=json`)
@@ -64,10 +73,14 @@ gbpjpy.innerText="≈ "+data2.result.toFixed(2)
 usdcny.innerText="≈ "+data3.result.toFixed(2)
 usdeur.innerText="≈ "+data4.result.toFixed(2)
 eurgbp.innerText="≈ "+data5.result.toFixed(2)
+main.style.display="block"
+spinner.classList.add("hidden")
 }
 etb()
 others()
 convertButton.onclick=async ()=>{
+	main.style.display="none"
+	spinner.classList.remove("hidden")
 	try {
 	const res=await fetch(`https://api.fxratesapi.com/convert?from=${fromCurrency.value.toUpperCase()}&to=${toCurrency.value.toUpperCase()}&date=${dateInput.value}&amount=${amount.value}&format=json`)
 	const data= await res.json()
@@ -76,6 +89,8 @@ convertButton.onclick=async ()=>{
 	much.innerText=amount.value+" "
 	convertedValue.innerText="≈ "+data.result.toFixed(2)
 	display.setAttribute("class","block")
+	main.style.display="block"
+	spinner.classList.add("hidden")
 	} catch (error) {
 	console.log(error)
 	}
