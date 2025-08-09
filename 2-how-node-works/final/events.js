@@ -1,46 +1,26 @@
-const EventEmitter = require("events");
-const http = require("http");
-
-class Sales extends EventEmitter {
-  constructor() {
-    super();
+const EventEmiter=require ("events")
+const http=require ("http")
+class Sales extends EventEmiter{
+  constructor(){
+    super()
   }
 }
+const emiter=new Sales()
 
-const myEmitter = new Sales();
+emiter.on("order",(food1,food2)=>{
+  console.log("Sucess")
+})
+emiter.on("order",(food1,food2)=>{
+  console.log("none")
+})
 
-myEmitter.on("newSale", () => {
-  console.log("There was a new sale!");
-});
+emiter.emit("order","pizza","coka")
 
-myEmitter.on("newSale", () => {
-  console.log("Costumer name: Jonas");
-});
+const server= http.createServer()
+server.on("request",(req,res)=>{
+  console.log("server is on")
+})
 
-myEmitter.on("newSale", stock => {
-  console.log(`There are now ${stock} items left in stock.`);
-});
-
-myEmitter.emit("newSale", 9);
-
-//////////////////
-
-const server = http.createServer();
-
-server.on("request", (req, res) => {
-  console.log("Request received!");
-  console.log(req.url);
-  res.end("Request received");
-});
-
-server.on("request", (req, res) => {
-  console.log("Another request 😀");
-});
-
-server.on("close", () => {
-  console.log("Server closed");
-});
-
-server.listen(8000, "127.0.0.1", () => {
-  console.log("Waiting for requests...");
-});
+server.listen(5000,()=>{
+  console.log("surver running on port 5000")
+})
