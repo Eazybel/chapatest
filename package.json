@@ -1,0 +1,23 @@
+{
+  "name": "smtp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eazybel/chapatest.git"
+  },
+  "author": "ezu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eazybel/chapatest/issues"
+  },
+  "homepage": "https://github.com/Eazybel/chapatest#readme",
+  "description": "",
+  "dependencies": {
+    "googleapis": "^156.0.0",
+    "nodemailer": "^7.0.5"
+  }
+}
